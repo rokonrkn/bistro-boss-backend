@@ -5,13 +5,14 @@ const port = process.env.PORT || 5000
 const mongoose = require("mongoose");
 const serverRoutes = require('./routes/server');
 const manuItemRoute = require('./routes/manuItemRoute');
+const registrationRoutes = require('./routes/registrationRoutes');
+const loginRoutes = require('./routes/loginRoutes');
 
 
 // middleware
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-// cors
 app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 // Local MongoDB URL
@@ -27,6 +28,8 @@ mongoose.connect(uri, {
 // routes
 app.use('/', serverRoutes);
 app.use('/api', manuItemRoute);
+app.use('/user', registrationRoutes);
+app.use('/user', loginRoutes);
 
 app.listen(port, () => {
   console.log(`Bistro boss backend listening on port ${port}`)
