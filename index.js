@@ -9,6 +9,7 @@ const serverRoutes = require('./routes/server');
 const manuItemRoute = require('./routes/manuItemRoute');
 const registrationRoutes = require('./routes/registrationRoutes');
 const loginRoutes = require('./routes/loginRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
 
 // middleware
 app.use(cors());
@@ -33,6 +34,8 @@ app.use('/', serverRoutes);
 app.use('/api', manuItemRoute);
 app.use('/user', registrationRoutes);
 app.use('/user', loginRoutes);
+app.use('/', bookingRoutes);
+
 
 app.listen(port, () => {
   console.log(`🚀 Bistro boss backend listening on port ${port}`);
