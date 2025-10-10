@@ -24,7 +24,7 @@ const postMenuItem = async (req, res) => {
     res.status(201).json({ message: 'Menu item created successfully' });
   } catch (error) {
     console.error('Error creating menu item:', error);
-    res.status(500).json({ error: 'Failed to create menu item' });
+    res.status(500).json({ error: 'Failed to `create` menu item' });
   }
 };
 
