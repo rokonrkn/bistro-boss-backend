@@ -24,4 +24,39 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, getAllUsers };
+const updateUserRole = async (req, res) => {
+    const { userId } = req.params;
+    const { role } = req.body;
+    try {
+        const updatedUser = await Registration.findByIdAndUpdate(userId, { role }, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json({ message: 'User role updated successfully', user: updatedUser });
+    } catch (error) {
+        console.error('Error updating user role:', error);
+        res.status(500).json({ error: 'Failed to update user role' });
+    }
+};
+
+const userDelete = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const deletedUser = await Registration.findByIdAndDelete(userId);
+        if (!deletedUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json({ message: 'User deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({ error: 'Failed to delete user' });
+    }
+};
+
+module.exports = 
+{ 
+    registerUser, 
+    getAllUsers,
+    updateUserRole,
+    userDelete
+};
