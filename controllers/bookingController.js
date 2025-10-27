@@ -2,9 +2,9 @@ const BookingTable = require('../models/bookingModels');
 
 const postBookingTable = async (req, res) => {
   try {
-    const { name, email, phone, date, time, guest } = req.body;
+    const { name, email, phone, date, time, guest, userEmail } = req.body;
 
-    const newBooking = new BookingTable({ name, email, phone, date, time, guest });
+    const newBooking = new BookingTable({ name, email, phone, date, time, guest, userEmail });
     await newBooking.save();
 
     res.status(201).json({ message: 'Booking created successfully' });
@@ -15,13 +15,24 @@ const postBookingTable = async (req, res) => {
 };
 
 const getAllBookings = async (req, res) => {
+  const { email } = req.params;
+  console.log(email);
+
   try {
-    const bookings = await BookingTable.find();
+    const bookings = await BookingTable.find({ userEmail: email });
     res.json(bookings);
   } catch (error) {
     console.error('Error fetching bookings:', error);
     res.status(500).json({ error: 'Failed to fetch bookings' });
   }
+
+  // try {
+  //   const bookings = await BookingTable.find();
+  //   res.json(bookings);
+  // } catch (error) {
+  //   console.error('Error fetching bookings:', error);
+  //   res.status(500).json({ error: 'Failed to fetch bookings' });
+  // }
 };
 
 

@@ -30,6 +30,10 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         enum: ['Done', 'Pending'],
         default: 'Pending'
+    },
+    userEmail: {
+        type: String,
+        required: true
     }
 });
 
