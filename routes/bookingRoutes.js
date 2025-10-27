@@ -4,7 +4,7 @@ const router = express.Router();
 const { postBookingTable, getAllBookings, updateBookingActivity } = require('../controllers/bookingController');
 
 router.post('/bookings', postBookingTable);
-router.get('/bookings', getAllBookings);
+router.get('/bookings/:email', getAllBookings);
 router.patch('/:id/activity', updateBookingActivity);
 
 
